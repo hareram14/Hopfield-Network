@@ -82,7 +82,7 @@ def main():
     print("Show prediction results...")
     plot(data, test, predicted)
     print("Show network weights matrix...")
-    #model.plot_weights()
+    model.plot_weights()
 
 if __name__ == '__main__':
     main()
