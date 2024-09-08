@@ -57,6 +57,16 @@ def preprocessing(img, w=128, h=128):
     flatten = np.reshape(shift, (w*h))
     return flatten
 
+def calculate_accuracy(original_data, predicted_data):
+    correct_bits = 0
+    total_bits = 0
+    for original, predicted in zip(original_data, predicted_data):
+        correct_bits += np.sum(original == predicted)
+        total_bits += original.size
+    
+    accuracy = (correct_bits / total_bits) * 100  # Accuracy in percentage
+    return accuracy
+
 def main():
     # Load data
     camera = skimage.data.camera()
@@ -83,6 +93,8 @@ def main():
     plot(data, test, predicted)
     print("Show network weights matrix...")
     model.plot_weights()
+    accuracy = calculate_accuracy(data, predicted)
+    print(f"Accuracy: {accuracy}%")
 
 if __name__ == '__main__':
     main()
